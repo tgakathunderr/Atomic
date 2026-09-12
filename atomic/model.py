@@ -105,7 +105,11 @@ class AtomicModel(nn.Module):
             new_states: updated states
             new_prev_xs: updated previous token vectors
         """
+        if token_id.dim() == 0:
+            token_id = token_id.unsqueeze(0)
         x_t = self.embeddings(token_id)
+        if x_t.dim() == 1:
+            x_t = x_t.unsqueeze(0)
 
         if prev_xs is None:
             prev_xs = [(None, None)] * len(self.blocks)

@@ -1,0 +1,16 @@
+{
+  "vocab_size": 616,
+  "d_model": 256,
+  "n_layers": 4,
+  "n_heads": 8,
+  "d_head": 32,
+  "d_ffn": 512,
+  "max_seq_len": 160,
+  "dropout": 0.0,
+  "bias": false,
+  "rms_norm_eps": 1e-06,
+  "decay_min": 0.01,
+  "decay_max": 0.99,
+  "tie_word_embeddings": true,
+  "initializer_range": 0.02
+}

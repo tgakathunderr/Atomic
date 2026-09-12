@@ -6,6 +6,10 @@ __pycache__/
 *.pt
 *.bin
 *.onnx
+
+# Allow production weights
+!models/atomic-reasoning-prod/best_model.pt
+!models/atomic-reasoning-prod/model.safetensors
 build/
 dist/
 *.egg-info/

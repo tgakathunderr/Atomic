@@ -2,7 +2,7 @@
 
 **Title**: ATOMIC: Adaptive Token Operator with Memory-efficient Inference on CPU  
 **Date**: 2026-09-12  
-**Author**: TG Industries & DeepMind Pair  
+**Author**: UnikAI Lab ([www.unikai.in](https://www.unikai.in))  
 **Status**: Approved for Implementation  
 
 ---
