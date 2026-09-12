@@ -109,8 +109,8 @@ Token 4096 ─> Still in L1 Cache (64 KB)! Zero DRAM latency overhead.
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/unikaid/atomic.git
-cd atomic
+git clone https://github.com/tgakathunderr/Atomic.git
+cd Atomic
 pip install -r requirements.txt  # Or: pip install torch fastapi uvicorn onnx onnxscript pytest
 ```
 

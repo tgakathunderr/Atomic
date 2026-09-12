@@ -5,7 +5,7 @@
 **Authors**: UnikAI Lab ([www.unikai.in](https://www.unikai.in))  
 **Date**: September 2026  
 **Status**: Research Paper & Technical Report  
-**Artifact Codebase**: `https://www.unikai.in`  
+**Artifact Codebase**: `https://github.com/tgakathunderr/Atomic` (UnikAI Lab: [www.unikai.in](https://www.unikai.in))  
 
 ---
 

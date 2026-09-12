@@ -170,6 +170,6 @@ Tested on **12th Gen Intel Core i7-12700H** (14 Cores, 20 Threads, Windows 11):
   author={UnikAI Lab},
   year={2026},
   journal={UnikAI Lab Technical Reports},
-  url={https://www.unikai.in}
+  url={https://github.com/tgakathunderr/Atomic}
 }
 ```
