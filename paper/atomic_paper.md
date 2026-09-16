@@ -2,7 +2,7 @@
 
 **A Unified Linear Recurrent Attention Architecture with Constant Footprint and Multi-Step Reasoning Capabilities**
 
-**Authors**: UnikAI Lab ([www.unikai.in](https://www.unikai.in))  
+**Authors**: UnikAI Lab ([www.unikai.in](https://www.unikai.in), `unikailab@proton.me`)  
 **Date**: September 2026  
 **Status**: Research Paper & Technical Report  
 **Artifact Codebase**: `https://github.com/tgakathunderr/Atomic` (UnikAI Lab: [www.unikai.in](https://www.unikai.in))  

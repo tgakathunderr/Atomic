@@ -8,7 +8,7 @@
 
 > **A novel linear recurrent language model architecture designed from first principles to train and run ultra-fast on any consumer CPU with constant $\mathcal{O}(1)$ memory footprint, zero KV-cache growth, and Chain-of-Thought scratchpad generation (produces CoT-structured output; answer accuracy is still early-stage, see [training report](docs/TRAINING_REPORT.md)).**
 > 
-> **Developed by UnikAI Lab** — [www.unikai.in](https://www.unikai.in)
+> **Developed by UnikAI Lab** — [www.unikai.in](https://www.unikai.in) (Contact: unikailab@proton.me)
 
 Read the full scientific research paper: [`paper/atomic_paper.md`](paper/atomic_paper.md)  
 Read the Hugging Face model card: [`MODEL_CARD.md`](MODEL_CARD.md)  

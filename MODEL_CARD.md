@@ -16,7 +16,7 @@ pipeline_tag: text-generation
 
 **Model Identifier**: `atomic-reasoning-prod`  
 **Architecture**: ATOMIC (Adaptive Token Operator with Memory-efficient Inference on CPU)  
-**Developers**: UnikAI Lab ([www.unikai.in](https://www.unikai.in))  
+**Developers**: UnikAI Lab ([www.unikai.in](https://www.unikai.in), `unikailab@proton.me`)  
 **Model Type**: Causal Linear Recurrent Language Model with Chain-of-Thought Scratchpads  
 **Precision**: FP32 / FP16 / Exportable to TorchScript & ONNX  
 **Release Date**: September 2026  
