@@ -242,7 +242,7 @@ Testing in-context retrieval capability on synthetic multi-query associative rec
 - **ATOMIC Accuracy**: **{recall_results['atomic_acc']*100:.1f}%**
 - **Standard Transformer Accuracy**: **{recall_results['transformer_acc']*100:.1f}%**
 
-> **Analysis**: ATOMIC's data-dependent continuous decay $g_t(x)$ and zero-FLOP token shifting successfully solve the associative recall bottleneck historically suffered by linear RNNs, achieving strong retrieval and multi-hop reasoning.
+> **Analysis**: Both models perform poorly on MQAR at this scale and training duration ({recall_results['atomic_acc']*100:.1f}% vs {recall_results['transformer_acc']*100:.1f}%, near-random baseline for this task). Associative recall capacity and multi-query retrieval at tiny parameter budgets (<10M) remain an open limitation for both architectures.
 """
 
     # Write docs/BENCHMARKS.md

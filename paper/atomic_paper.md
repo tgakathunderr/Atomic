@@ -263,16 +263,12 @@ As context length increases from 128 to 4,096 tokens:
 
 ### 4.3 Multi-Query Associative Recall (MQAR)
 
-To verify that linear recurrence does not suffer from synthetic recency degradation, we evaluated both architectures on the standardized Multi-Query Associative Recall (MQAR) benchmark:
+We evaluated both architectures on synthetic Multi-Query Associative Recall (MQAR) at the micro parameter scale (~5.8M parameters):
 
-| Model Architecture | Sequence Length | Key-Value Pairs | Accuracy (%) |
-| :--- | :---: | :---: | :---: |
-| **Standard Transformer (MHA)** | 256 | 16 | **100.0%** |
-| **ATOMIC (GLRA + Token Shift)** | 256 | 16 | **93.8%** |
-| **Standard Transformer (MHA)** | 512 | 32 | **98.4%** |
-| **ATOMIC (GLRA + Token Shift)** | 512 | 32 | **89.1%** |
+- **ATOMIC Accuracy**: **2.5%**
+- **Standard Transformer Accuracy**: **5.0%**
 
-ATOMIC achieves near-transformer recall capacity while operating at more than double the generation speed.
+Both architectures perform poorly on MQAR at this scale and training duration, remaining close to the random-choice baseline. Associative recall capacity and multi-query retrieval at small parameter budgets (<10M) remain an open limitation for both linear recurrent architectures and standard attention baselines without extensive pretraining or larger hidden state dimensions.
 
 ---
 
@@ -333,7 +329,7 @@ Model Generation:
 <answer>180 km</answer>
 ```
 
-On held-out algorithmic execution tasks (list reversal, parity counting, element lookup), the model achieved **100% Chain-of-Thought validity** and successfully completed multi-step derivations.
+On held-out algorithmic execution tasks (list reversal, parity counting, element lookup), the model learned consistent syntactic Chain-of-Thought structuring (98.9% tag validity). However, exact deductive and mathematical answer accuracy on broader tasks remains early-stage (2.2% exact match, documented in detail in `docs/TRAINING_REPORT.md`), demonstrating that while structural scratchpad generation is successfully learned on CPU, scaling parameter capacity and pretraining steps will be essential for reliable deductive accuracy.
 
 ---
 

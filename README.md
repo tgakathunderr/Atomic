@@ -3,10 +3,10 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![PyTorch CPU](https://img.shields.io/badge/PyTorch-CPU%20Accelerated-EE4C2C.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Cache: Fixed 64KB](https://img.shields.io/badge/Recurrent%20Cache-64.0%20KB%20Fixed-purple.svg)]()
-[![Speedup: 2.5x](https://img.shields.io/badge/CPU%20Speedup-2.51x%20vs%20Transformer-brightgreen.svg)]()
+[![Cache: Fixed O(1)](https://img.shields.io/badge/Recurrent%20Cache-Fixed%20O(1)-purple.svg)]()
+[![Speedup: 2.62x](https://img.shields.io/badge/CPU%20Speedup-Up%20to%202.62x%20vs%20Transformer-brightgreen.svg)]()
 
-> **A novel linear recurrent language model architecture designed from first principles to train and run ultra-fast on any consumer CPU with constant $\mathcal{O}(1)$ memory footprint, zero KV-cache growth, and native multi-step reasoning capabilities.**
+> **A novel linear recurrent language model architecture designed from first principles to train and run ultra-fast on any consumer CPU with constant $\mathcal{O}(1)$ memory footprint, zero KV-cache growth, and Chain-of-Thought scratchpad generation (produces CoT-structured output; answer accuracy is still early-stage, see [training report](docs/TRAINING_REPORT.md)).**
 > 
 > **Developed by UnikAI Lab** — [www.unikai.in](https://www.unikai.in)
 
@@ -23,7 +23,7 @@ Read the training convergence report: [`docs/TRAINING_REPORT.md`](docs/TRAINING_
 - ⚡ **Up to 2.62× Speedup on CPU (Crossover at ~2048 tokens)**: ATOMIC underperforms below ~2048 tokens, wins beyond it, sustaining flat O(1) latency.
 - 💾 **Strictly Constant Memory Footprint**: Uses a **fixed 192.0 KB recurrent state** across all sequence lengths. Zero KV-cache growth (O(1) memory), achieving **256× memory compression** over standard Transformers at 4,096 tokens.
 - 🔄 **Exact Mathematical Duality**: Parallel associative scan $\mathcal{O}(T)$ for multi-core parallel training, exactly equivalent to an $\mathcal{O}(1)$ time recurrent step during inference ($\max|\Delta| < 10^{-4}$).
-- 🧠 **Trained Production Reasoning LM**: Includes pretrained weights (`atomic-reasoning-prod`) trained completely on CPU that generate structured `<think>...</think>` Chain-of-Thought derivations and answers.
+- 🧠 **Proof-of-Concept Reasoning LM**: Includes model weights (`atomic-reasoning-prod`, 3.3M params) trained entirely on CPU. Demonstrates learning structured `<think>...</think>` Chain-of-Thought format; exact answer accuracy is early-stage at 2.2% (see [`docs/TRAINING_REPORT.md`](docs/TRAINING_REPORT.md)).
 - 🚀 **Full Production Ecosystem**:
   - Interactive colored terminal console (`demo/cli.py`)
   - OpenAI-compatible FastAPI server with streaming Server-Sent Events (`demo/api.py`)

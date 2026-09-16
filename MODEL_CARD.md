@@ -157,8 +157,8 @@ Tested on **12th Gen Intel Core i7-12700H** (14 Cores, 20 Threads, Windows 11):
 
 ## 6. Limitations and Intended Use
 
-- **Intended Use**: On-device edge reasoning, offline embedded reasoning agents, educational mathematics/logic tutors, low-latency CPU microservices.
-- **Limitations**: As a 3.3M parameter model, broad factual world knowledge is limited compared to multi-billion parameter frontier models. The model is optimized for structural step-by-step deductive execution rather than open-ended trivia.
+- **Intended Use**: On-device edge reasoning research, offline embedded reasoning format experiments, low-latency CPU microservices.
+- **Limitations & Early-Stage Accuracy**: While the 3.3M parameter model successfully learns to produce structured `<think>...</think>` Chain-of-Thought scratchpads and `<answer>...</answer>` tags (98.9% tag validity), its exact mathematical and deductive answer accuracy is early-stage (2.2% exact match, as detailed in [`docs/TRAINING_REPORT.md`](docs/TRAINING_REPORT.md)). Broad factual world knowledge is naturally limited compared to multi-billion parameter models, and scaling parameter capacity is required for reliable mathematical deduction.
 
 ---
 
