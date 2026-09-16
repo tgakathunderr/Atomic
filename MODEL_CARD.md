@@ -51,7 +51,14 @@ The model is trained to reason in a multi-step manner using structured `<think>.
 
 ## 3. Quickstart & Usage
 
-### 3.1 Python In-Memory Inference
+### 3.1 Installation
+
+```bash
+# Direct pip install from GitHub:
+pip install git+https://github.com/tgakathunderr/Atomic.git
+```
+
+### 3.2 Python In-Memory Inference
 
 ```python
 import torch

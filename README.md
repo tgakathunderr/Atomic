@@ -118,16 +118,23 @@ Token 4096 ─> Still in L1 Cache (64 KB)! Zero DRAM latency overhead.
 
 ### 1. Installation
 
-Clone the repository and install dependencies:
+#### Direct Install via `pip`:
+Install directly from GitHub into any Python environment without manual cloning:
 
+```bash
+# Core ATOMIC library:
+pip install git+https://github.com/tgakathunderr/Atomic.git
+
+# With serving & ONNX export extras:
+pip install "atomic-lm[all] @ git+https://github.com/tgakathunderr/Atomic.git"
+```
+
+#### From Source (for local development, demos & benchmarks):
 ```bash
 git clone https://github.com/tgakathunderr/Atomic.git
 cd Atomic
 
-# Install core library in editable mode:
-pip install -e .
-
-# Or install with serving and export dependencies:
+# Install in editable mode with all dependencies:
 pip install -e ".[all]"
 ```
 
