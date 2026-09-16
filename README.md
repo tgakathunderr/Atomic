@@ -123,7 +123,12 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/tgakathunderr/Atomic.git
 cd Atomic
-pip install -r requirements.txt  # Or: pip install torch fastapi uvicorn onnx onnxscript pytest
+
+# Install core library in editable mode:
+pip install -e .
+
+# Or install with serving and export dependencies:
+pip install -e ".[all]"
 ```
 
 ### 2. Interactive CLI Reasoning Console
