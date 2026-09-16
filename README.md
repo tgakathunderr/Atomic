@@ -20,8 +20,8 @@ Read the training convergence report: [`docs/TRAINING_REPORT.md`](docs/TRAINING_
 
 ## 🌟 Key Highlights
 
-- ⚡ **2.51$\times$ Faster Inference than Transformer on CPU**: Sustains **100–360+ tokens/second** on a standard Intel Core i7 laptop CPU.
-- 💾 **Strictly Constant Memory Footprint**: Uses a **fixed 64.0 KB recurrent state** across all sequence lengths. Zero KV-cache growth ($\mathcal{O}(1)$ memory), achieving **256$\times$ memory compression** over standard Transformers at 4,096 tokens.
+- ⚡ **Up to 2.62× Speedup on CPU (Crossover at ~2048 tokens)**: ATOMIC underperforms below ~2048 tokens, wins beyond it, sustaining flat O(1) latency.
+- 💾 **Strictly Constant Memory Footprint**: Uses a **fixed 192.0 KB recurrent state** across all sequence lengths. Zero KV-cache growth (O(1) memory), achieving **256× memory compression** over standard Transformers at 4,096 tokens.
 - 🔄 **Exact Mathematical Duality**: Parallel associative scan $\mathcal{O}(T)$ for multi-core parallel training, exactly equivalent to an $\mathcal{O}(1)$ time recurrent step during inference ($\max|\Delta| < 10^{-4}$).
 - 🧠 **Trained Production Reasoning LM**: Includes pretrained weights (`atomic-reasoning-prod`) trained completely on CPU that generate structured `<think>...</think>` Chain-of-Thought derivations and answers.
 - 🚀 **Full Production Ecosystem**:
@@ -36,16 +36,28 @@ Read the training convergence report: [`docs/TRAINING_REPORT.md`](docs/TRAINING_
 
 Tested on a consumer laptop CPU (**12th Gen Intel Core i7-12700H**, 14 Cores, 20 Threads, Windows 11):
 
-### 1. Generation Speed vs. Standard GPT-2 Transformer
+<!-- BENCHMARK_TABLE_START -->
+### 1. Generation Speed vs. Standard GPT-2 Transformer (Micro Model: ~5.8M params)
 
-| Context Length | Standard Transformer | ATOMIC (This Work) | Speedup Ratio | ATOMIC Memory | Transformer Memory |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| **128 tokens** | 164.5 tok/s | **362.4 tok/s** | **2.20$\times$** | **64.0 KB** | 512.0 KB |
-| **256 tokens** | 138.8 tok/s | **348.6 tok/s** | **2.51$\times$** | **64.0 KB** | 1,024.0 KB |
-| **512 tokens** | 92.4 tok/s | **210.1 tok/s** | **2.27$\times$** | **64.0 KB** | 2,048.0 KB |
-| **1,024 tokens** | 49.2 tok/s | **99.4 tok/s** | **2.02$\times$** | **64.0 KB** | 4,096.0 KB |
-| **2,048 tokens** | 22.8 tok/s | **42.1 tok/s** | **1.85$\times$** | **64.0 KB** | 8,192.0 KB |
-| **4,096 tokens** | 9.7 tok/s | **18.6 tok/s** | **1.92$\times$** | **64.0 KB** | 16,384.0 KB (16.38 MB) |
+Averaged over **3 independent trials** per point on 12th Gen Intel Core i7-12700H (14 Cores, 20 Threads, PyTorch CPU FP32):
+
+| Context Length | Standard Transformer | ATOMIC (This Work) | Speedup Ratio | ATOMIC Memory | Transformer Memory | Advantage / Winner |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **  32 tokens** | 542.5 tok/s ( 1.84 ms) | **318.2 tok/s** ( 3.14 ms) | **0.59x** | **192.0 KB** | 384.0 KB | Transformer (short context) |
+| **  64 tokens** | 434.8 tok/s ( 2.30 ms) | **285.5 tok/s** ( 3.50 ms) | **0.66x** | **192.0 KB** | 768.0 KB | Transformer (short context) |
+| ** 128 tokens** | 426.7 tok/s ( 2.34 ms) | **302.9 tok/s** ( 3.30 ms) | **0.71x** | **192.0 KB** | 1536.0 KB | Transformer (short context) |
+| ** 256 tokens** | 471.5 tok/s ( 2.12 ms) | **309.6 tok/s** ( 3.23 ms) | **0.66x** | **192.0 KB** | 3072.0 KB | Transformer (short context) |
+| ** 512 tokens** | 413.6 tok/s ( 2.42 ms) | **353.0 tok/s** ( 2.83 ms) | **0.86x** | **192.0 KB** | 6144.0 KB | Transformer (short context) |
+| **1024 tokens** | 316.4 tok/s ( 3.16 ms) | **308.2 tok/s** ( 3.24 ms) | **0.98x** | **192.0 KB** | 12288.0 KB | Tied (~equal) |
+| **2048 tokens** | 164.1 tok/s ( 6.09 ms) | **307.6 tok/s** ( 3.25 ms) | **1.87x** | **192.0 KB** | 24576.0 KB | **ATOMIC** (O(1) memory) |
+| **4096 tokens** | 103.3 tok/s ( 9.68 ms) | **270.4 tok/s** ( 3.70 ms) | **2.62x** | **192.0 KB** | 49152.0 KB | **ATOMIC** (O(1) memory) |
+
+> **Honest Crossover Finding**: **"ATOMIC underperforms below ~2048 tokens, wins beyond it."**
+>
+> - **Below ~2048 tokens**: Standard Transformer is faster because its tiny KV cache fits entirely within low-latency L1/L2 CPU cache, and standard Multi-Head Attention involves fewer gating and recurrent state projections.
+> - **Beyond ~2048 tokens**: ATOMIC wins decisively, reaching **2.62× speedup** at 4,096 tokens. The Transformer suffers from quadratic compute $\mathcal{O}(T^2)$ and massive DRAM KV-cache thrashing, while ATOMIC sustains flat $\mathcal{O}(1)$ step latency and a strictly fixed 192.0 KB footprint.
+
+<!-- BENCHMARK_TABLE_END -->
 
 ### 2. Why Transformers Stall on Consumer CPUs
 

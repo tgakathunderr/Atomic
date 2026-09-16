@@ -81,7 +81,8 @@ class StandardTransformerLM(nn.Module):
         super().__init__()
         self.config = config
         self.embeddings = nn.Embedding(config.vocab_size, config.d_model)
-        self.pos_emb = nn.Embedding(config.max_seq_len, config.d_model)
+        max_pos = max(config.max_seq_len, 16384)
+        self.pos_emb = nn.Embedding(max_pos, config.d_model)
         self.blocks = nn.ModuleList([StandardTransformerBlock(config) for _ in range(config.n_layers)])
         self.ln_f = nn.LayerNorm(config.d_model, eps=config.rms_norm_eps)
         self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
